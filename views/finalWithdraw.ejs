@@ -1,0 +1,127 @@
+<%- include ('partials/dashboardHeader.ejs') %>
+
+
+    <body id="page-top">
+        <div id="wrapper" style="background-color: #121d33 !important;
+    background-image: url(images/hero-gradient.svg);
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;">
+            <%- include ('partials/dashboardSidetab.ejs') %>
+
+
+                <div id="content-wrapper" class="d-flex flex-column">
+
+                    <!-- Main Content -->
+                    <div id="content">
+
+                        <%- include ('partials/dashboardNavTab.ejs') %>
+
+
+                            <div class="container-fluid">
+
+                                <!-- Page Heading -->
+                                <h1 class="h3 mb-2 text-gray-800"> Running Plans </h1>
+                                <%if(error){%>
+
+                                    <p class="mb-4" style="color: rgb(23, 182, 23);" id="www">
+                                        <%=error%>
+                                    </p>
+                                    <%}%>
+
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Withdraw</h6>
+                                            </div>
+                                            <!-- <p style="padding-left: 10px; color: rgb(23, 182, 23); display: none;" id="displayWithdrawalInfo" >Your request has been received and will be processed within 24hrs</p> -->
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+
+                                                    <form method="POST" action="/withdrawalRequest"
+                                                        style="margin: 5px;">
+
+                                                        <fieldset style="padding: 10px;">
+                                                            <%if(receiptID){%>
+
+                                                                <input type="hidden" value="<%=receiptID %>"
+                                                                    name="receiptID" />
+
+                                                                <%}%>
+
+
+                                                                    <div class="form-group">
+                                                                        <div class="field-wrap">
+                                                                            <%if(profit){%>
+                                                                                <input type="number" name="roi" required
+                                                                                    class="form-control input-bordered"
+                                                                                    max="<%=profit%>"
+                                                                                    maxlength="<%=profit%>"
+                                                                                    placeholder="Enter Amount To Withdraw">
+                                                                                <%}%>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="field-wrap">
+                                                                            <input type="text" name="wallet" required
+                                                                                class="form-control input-bordered"
+                                                                                minlength="10"
+                                                                                placeholder="Enter wallet address">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <button
+                                                                        class="form-control btn btn-success btn-block btn-md"
+                                                                        type="submit" style="width: 100%;"> Submit
+                                                                    </button>
+                                                        </fieldset>
+
+
+
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                            </div>
+                    </div>
+
+
+
+
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; nexgoldfinance.com 2021</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+
+        <script>
+            // var info = document.getElementById("www2").innerText;
+            // // console.log(info)
+            //   if (document.getElementById("www").innerText !== "") {
+            //   // console.log(info)
+            //   swal("try again", `${info}`, "info")
+            //   }
+
+            var success2 = document.getElementById("www").innerText
+            console.log(success2)
+            if (document.getElementById("www").innerText !== "") {
+                // console.log(success)
+                swal("", `${success2}`, "info")
+            }
+        </script>
+        <%- include ('partials/dashboardFooter.ejs') %>
+
+    </body>
+
+    </html>

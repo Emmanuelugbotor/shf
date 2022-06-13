@@ -1,0 +1,148 @@
+<%- include ('partials/dashboardHeader.ejs') %>
+
+  <body id="page-top">
+
+    <div id="wrapper" style="
+      background-color: #121d33 !important;
+      background-image: url(images/hero-gradient.svg);
+      background-position-y: bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+    ">
+      <%- include ('partials/dashboardSidetab.ejs') %>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+          <div id="content">
+            <%- include ('partials/dashboardNavTab.ejs') %>
+
+              <div class="container-fluid">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h1 class="h3 mb-0 text-gray-800">Investment package</h1>
+                </div>
+
+                <div class="row ">
+
+
+                  <div class="col-md-4" style="margin-bottom: 10px;">
+                    <div class="card border-left-primary shadow h-100 py-2 ">
+                      <div class="card-body">
+                        <div class="feature card font-weight-bold text-gray-800" style="padding: 10px">
+                          <h5 class="title title-sm">Trial Package</h5>
+                          <small>Min price: 100 USD</small><br />
+                          <small>Max price: 999 USD</small><br />
+                          <small>Duration: 6 days</small><br />
+                          <small>Returns: 4% daily</small><br />
+
+
+                          <a href="/mining/Packages$Trial" class="btn btn-primary btn-sm"
+                            style="color: white; background-color: #4e73df;"> Purchase Plan</a>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4" style="margin-bottom: 10px;">
+                    <div class="card border-left-success shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="feature card" style="padding: 10px">
+                          <h5 class="title title-sm">Premium Package</h5>
+                          <small>Min price: 1,000 USD</small><br />
+                          <small>Max price: 19,999 USD</small><br />
+                          <small>Duration: 6 days</small><br />
+                          <small>Returns: 5% daily </small><br />
+
+                          <a href="/mining/Packages$Premium" class="btn btn-primary btn-sm"
+                            style="color: white; background-color: #1cc88a; border-color: #1cc88a; "> Purchase Plan</a>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4" style="margin-bottom: 10px;">
+                    <div class="card border-left-info">
+                      <div class="card-body">
+                        <div class="feature card" style="padding: 10px">
+                          <h5 class="title title-sm">Full Membership Package </h5>
+                          <small>Min price: 20,000 USD</small><br />
+                          <small>Max price: 99,999 USD</small><br />
+                          <small>Duration: 6 days</small><br />
+                          <small>Returns: 6% daily</small><br />
+
+                          <a href="/mining/Packages$Full" class="btn btn-primary btn-sm"
+                            style="color: white;  background-color: #36b9cc; border-color: #1cc88a; "> Purchase Plan</a>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4" style="margin-bottom: 10px;">
+                    <div class="card border-left-warning">
+                      <div class="card-body">
+                        <div class="feature card" style="padding: 10px">
+                          <h5 class="title title-sm"> Diamond Package </h5>
+                          <small>Min price: 100,000 USD</small><br />
+                          <small>Max price: 499,999 USD</small><br />
+                          <small>Duration: 6 days</small><br />
+                          <small>Returns: 7% daily </small><br />
+
+                          <a href="/mining/Packages$Diamond" class="btn btn-primary btn-sm"
+                            style="color: white; background-color: #f6c23e; border-color: #f6c23e; "> Purchase Plan</a>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4" style="margin-bottom: 10px;">
+                    <div class="card border-left-danger">
+                      <div class="card-body">
+                        <div class="feature card" style="padding: 10px">
+                          <h5 class="title title-sm">Special Package </h5>
+                          <small>Price: 500000 USD</small><br />
+                          <small>Duration: 6 days </small><br />
+                          <small>Returns: 8% daily </small><br />
+
+                          <a href="/mining/Packages$Special" class="btn btn-primary btn-sm"
+                            style="background-color: #e74a3b; border-color: #e74a3b; ">
+                            Purchase Plan
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+          </div>
+          <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; nexgoldfinance.com 2021</span>
+              </div>
+            </div>
+          </footer>
+        </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <style>
+      .card {
+        margin: "10px" !important;
+      }
+    </style>
+
+    <%- include ('partials/dashboardFooter.ejs') %>
+  </body>

@@ -1,0 +1,199 @@
+<%- include ('partials/dashboardHeader.ejs') %>
+
+
+    <body id="page-top">
+        <div id="wrapper" style="
+    background-color: #121d33 !important;
+    background-image: url(images/hero-gradient.svg);
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;">
+            <%- include ('partials/dashboardSidetab.ejs') %>
+
+
+                <div id="content-wrapper" class="d-flex flex-column">
+
+                    <!-- Main Content -->
+                    <div id="content">
+
+                        <%- include ('partials/dashboardNavTab.ejs') %>
+
+
+                            <div class="container-fluid">
+
+                                <!-- Page Heading -->
+                                <h1 class="h3 mb-2 text-gray-800"> Running Plans </h1>
+                                <%if(error){%>
+
+                                    <p class="mb-4" style="color: rgb(23, 182, 23);">
+                                        <%=error%>
+                                    </p>
+                                    <%}%>
+
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Data</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered" id="dataTable" width="100%"
+                                                        cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Plan</th>
+                                                                <th>Status</th>
+                                                                <th>Amount</th>
+                                                                <th>Profit %</th>
+                                                                <th> + Ref Bonus</th>
+                                                                <th>Date</th>
+                                                                <th>Due date</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            <%if(locals.pending){%>
+                                                                <% Object.values(pending).forEach(function(res) {%>
+
+
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= res.package.split("$") %>
+                                                                        </td>
+                                                                        <td class="btn btn-danger btn-sm">
+                                                                            <%= res.status %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= res.Price %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= res.Returns %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= res.roi %>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= res.depositdate %>
+                                                                        </td id="<%=res.id%>" style="color: black;">
+                                                                        <td>
+                                                                            <%= res.duedate %>
+                                                                        </td>
+
+
+                                                                        <td>
+                                                                            <a class="btn btn-primary btn-sm"
+                                                                                href="/removeplan/<%= res.id %>">Delete</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <%})%>
+                                                                        <%}%>
+
+
+                                                                            <%if(locals.running){%>
+                                                                                <% Object.values(running).forEach(function(res)
+                                                                                    {%>
+
+
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <%= res.package.split("$")%>
+                                                                                        </td>
+                                                                                        <td
+                                                                                            class="btn btn-success btn-sm">
+                                                                                            <%= res.status %>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <%= res.roi %> USD
+                                                                                        </td>
+
+                                                                                        <td>
+                                                                                            <%= res.Returns %>
+                                                                                        </td>
+
+
+
+                                                                                        <td>
+                                                                                            <%if(res.reference){%>
+                                                                                                Yes
+                                                                                                <%}else{%>
+                                                                                                    No
+                                                                                                    <%}%>
+                                                                                        </td>
+
+                                                                                        <td>
+                                                                                            <script>
+                                                                                                var today = new Date(`<%= res.depositdate %>`);
+                                                                                                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+                                                                                                document.write(date)
+                                                                                            </script>
+                                                                                        </td>
+                                                                                        <td id="<%=res.id%>"
+                                                                                            style="color: black;">
+
+                                                                                            <script>
+
+
+                                                                                                // console.log(countDownDate - new Date().getTime())
+                                                                                                var x = setInterval(function () {
+                                                                                                    var countDownDate = new Date(`<%= res.duedate %>`).getTime();
+                                                                                                    var now = new Date().getTime();
+
+                                                                                                    var distance = countDownDate - now;
+
+                                                                                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                                                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                                                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                                                                                    let nowDate = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                                                                                                    document.getElementById("<%= res.id %>").innerHTML = nowDate
+                                                                                                    if (distance < 0) {
+                                                                                                        clearInterval(x);
+                                                                                                        document.getElementById("<%=res.id %>").innerHTML = "Completed"
+
+                                                                                                    }
+                                                                                                }, 1000);
+                                                                                            </script>
+
+                                                                                        </td>
+
+
+                                                                                        <td>
+                                                                                            <a class="btn btn-primary btn-sm"
+                                                                                                href="/removeplan/<%= res.id %>">Delete</a>
+                                                                                        </td>
+
+                                                                                    </tr>
+                                                                                    <%})%>
+                                                                                        <%}%>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                            </div>
+                    </div>
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; nexgoldfinance.com 2021</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <%- include ('partials/dashboardFooter.ejs') %>
+
+    </body>
+
+    </html>

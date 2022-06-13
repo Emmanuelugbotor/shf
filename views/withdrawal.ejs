@@ -1,0 +1,267 @@
+<%- include ('partials/dashboardHeader.ejs') %>
+
+
+    <body id="page-top">
+        <div id="wrapper" style="background-color: #121d33 !important;
+    background-image: url(images/hero-gradient.svg);
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;">
+            <%- include ('partials/dashboardSidetab.ejs') %>
+
+
+                <div id="content-wrapper" class="d-flex flex-column">
+
+                    <!-- Main Content -->
+                    <div id="content">
+
+                        <%- include ('partials/dashboardNavTab.ejs') %>
+
+
+                            <div class="container-fluid">
+
+                                <!-- Page Heading -->
+                                <h1 class="h3 mb-2 text-gray-800"> Running Plans </h1>
+                                <%if(error){%>
+
+                                    <p class="mb-4" style="color: rgb(23, 182, 23);" id="www">
+                                        <%=error%>
+                                    </p>
+                                    <%}%>
+
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Withdraw Details</h6>
+                                            </div>
+                                            <!-- <p style="padding-left: 10px; color: rgb(23, 182, 23); display: none;" id="displayWithdrawalInfo" >Your request has been received and will be processed within 24hrs</p> -->
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <%if(bonus){%>
+
+                                                        <h5>Bonus : <button class="btn btn-sm btn-primary">$<%=bonus%>
+                                                            </button></h5> <br />
+                                                        <%}%>
+
+                                                            <table class="table table-bordered" id="dataTable"
+                                                                width="100%" cellspacing="0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Plan</th>
+                                                                        <th>Status</th>
+                                                                        <th>Date</th>
+                                                                        <th>Due date</th>
+                                                                        <th>Deposit</th>
+                                                                        <th>Returns</th>
+                                                                        <th>Withdraw</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+
+                                                                <tbody>
+
+
+
+
+                                                                    <%if(locals.outPut.length){%>
+                                                                        <% Object.values(outPut).forEach(function(res)
+                                                                            {%>
+
+
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <%= res.package.split("$")%>
+                                                                                </td>
+                                                                                <td class="btn btn-success btn-sm">
+                                                                                    <%= res.status %>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <script>
+                                                                                        var today = new Date(`<%= res.depositdate %>`);
+                                                                                        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+                                                                                        document.write(date)
+                                                                                    </script>
+                                                                                </td>
+                                                                                <td id="<%= res.id %>">
+
+                                                                                    <script>
+
+
+                                                                                        // console.log(countDownDate - new Date().getTime())
+                                                                                        var x = setInterval(function () {
+                                                                                            var countDownDate = new Date(`<%= res.duedate %>`).getTime();
+                                                                                            var now = new Date().getTime();
+
+                                                                                            var distance = countDownDate - now;
+
+                                                                                            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                                                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                                                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                                                                            let nowDate = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                                                                                            document.getElementById("<%= res.id %>").innerHTML = nowDate
+                                                                                            if (distance < 0) {
+                                                                                                clearInterval(x);
+                                                                                                document.getElementById("<%= res.id %>").innerHTML = "Completed"
+                                                                                            }
+                                                                                        }, 1000);
+                                                                                    </script>
+
+                                                                                </td>
+                                                                                <td>
+
+                                                                                    <%if(res.withdraw_req){%>
+
+                                                                                        <script>
+                                                                                            let total = parseInt(`<%= res.Price %>`) + parseInt(`<%= res.withdraw_req %>`)
+
+                                                                                            document.write(`${total} USD`)
+
+                                                                                        </script>
+
+                                                                                        <%}else{%>
+                                                                                            <%= res.Price %> USD
+                                                                                                <%}%>
+
+                                                                                </td>
+
+
+                                                                                <td>
+                                                                                    $<%= res.totalProfit %>
+                                                                                </td>
+                                                                                <td>
+                                                                                    $<%= res.withdraw_req %>
+
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <!-- <button class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#register-seller<%= res.id %>"> Withdraw  </button> -->
+                                                                                    <%if(res.ref_amt> 0){%>
+
+                                                                                        <a class="btn btn-primary btn-sm"
+                                                                                            href="/withdrawalUpdate/<%= res.id %>/<%= res.user_id %>/<%= res.totalProfit %>/<%= res.ref_amt %>">
+                                                                                            Withdraw </a>
+                                                                                        <%}else{%>
+                                                                                            <a class="btn btn-primary btn-sm"
+                                                                                                href="/withdrawalUpdate/<%= res.id %>/<%= res.user_id %>/<%= res.totalProfit %>/<%= res.Price %>">
+                                                                                                Withdraw </a>
+
+                                                                                            <%}%>
+
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <div class="modal fade"
+                                                                                id="register-seller<%= res.id %>">
+                                                                                <div
+                                                                                    class="modal-dialog modal-dialog-centered">
+                                                                                    <div class="modal-content"><a
+                                                                                            href="#" class="modal-close"
+                                                                                            data-dismiss="modal"
+                                                                                            aria-label="Close"><em
+                                                                                                class="ti ti-close"></em></a>
+                                                                                        <div class="ath-container m-0">
+                                                                                            <div class="ath-body">
+
+                                                                                                <h5 class="ath-heading title"
+                                                                                                    style="margin: 5px; padding: 5px;">
+                                                                                                    Withdrawal </h5>
+
+                                                                                                <form method="POST"
+                                                                                                    action="/withdrawalRequest"
+                                                                                                    style="margin: 5px;">
+
+                                                                                                    <fieldset
+                                                                                                        style="padding: 10px;">
+
+                                                                                                        <input
+                                                                                                            type="hidden"
+                                                                                                            value="<%= res.totalProfit %>"
+                                                                                                            name="roi" />
+
+                                                                                                        <div
+                                                                                                            class="form-group">
+                                                                                                            <div
+                                                                                                                class="field-wrap">
+                                                                                                                <input
+                                                                                                                    type="text"
+                                                                                                                    name="wallet"
+                                                                                                                    required
+                                                                                                                    class="form-control input-bordered"
+                                                                                                                    minlength="10"
+                                                                                                                    placeholder="Enter wallet address">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <button
+                                                                                                            class="form-control btn btn-success btn-block btn-md"
+                                                                                                            type="submit"
+                                                                                                            style="width: 100%;">
+                                                                                                            Submit
+                                                                                                        </button>
+                                                                                                    </fieldset>
+                                                                                                </form>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+
+                                                                            <%})%>
+                                                                                <%}else{%>
+                                                                                    <h5
+                                                                                        style="color: rgb(230, 66, 66);">
+                                                                                        You Have No Completed Plans</h5>
+
+                                                                                    <%}%>
+
+                                                                </tbody>
+                                                            </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                            </div>
+                    </div>
+
+
+
+
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; nexgoldfinance.com 2021</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+
+        <script>
+            // var info = document.getElementById("www2").innerText;
+            // // console.log(info)
+            //   if (document.getElementById("www").innerText !== "") {
+            //   // console.log(info)
+            //   swal("try again", `${info}`, "info")
+            //   }
+
+            var success2 = document.getElementById("www").innerText
+            console.log(success2)
+            if (document.getElementById("www").innerText !== "") {
+                // console.log(success)
+                swal("Request Sent", `${success2}`, "success")
+            }
+        </script>
+        <%- include ('partials/dashboardFooter.ejs') %>
+
+    </body>
+
+    </html>

@@ -1,0 +1,141 @@
+<%- include ('partials/dashboardHeader.ejs') %>
+
+  <body id="page-top">
+    <div id="wrapper" style="
+      background-color: #121d33 !important;
+      background-image: url(images/hero-gradient.svg);
+      background-position-y: bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+    ">
+      <%- include ('partials/dashboardSidetab.ejs') %>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+          <div id="content">
+            <%- include ('partials/dashboardNavTab.ejs') %>
+
+              <div class="container-fluid">
+                <center>
+                  <div>
+                    <h1 class="h3 mb-0 text-gray-500">Payments</h1>
+                  </div>
+                </center>
+
+                <%if(data && address && img){%>
+
+                  <div class="row">
+                    <div class="col-md-3"></div>
+
+                    <div class="col-xl-6 col-md-6 mb-4">
+                      <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="
+                          text-xs
+                          font-weight-bold
+                          text-success text-uppercase
+                          mb-1
+                        ">
+                                Payment Process
+                              </div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="feature card" style="padding: 10px">
+                                      <%if(error){%>
+
+                                        <small style="color: rgb(211, 64, 64)">
+                                          <%= error %>
+                                        </small>
+                                        <br />
+
+                                        <%}%>
+
+                                          <small style="text-align: center">
+                                            <span style="color: rgb(34, 34, 209)"><b>
+                                                Kindly deposit <%= depositAmt %> USD worth
+                                                  of BTC
+                                              </b>
+                                            </span>
+                                            <br />
+
+                                            <b style="color: black">
+                                              to: <br />
+                                              <%=address%>
+                                            </b>
+                                          </small>
+                                          <img class="img-fluid" src="<%=img%>" />
+                                          <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#payment">
+                                            Upload Payment Receipts
+                                          </button>
+
+                                          <div class="modal fade" id="payment" tabindex="-1" role="dialog"
+                                            aria-labelledby="payments" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="payments">
+                                                    Upload payment receipts
+                                                  </h5>
+                                                  <button class="close" type="button" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <form action="/finalPayment" class="form-control"
+                                                    enctype="multipart/form-data" method="POST">
+                                                    <div class="form-group">
+                                                      <input type="file" required="required" name="receipt" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <input type="hidden" value="<%=data%>" name="pac" />
+                                                      <input type="hidden" value="<%=depositAmt%>"
+                                                        name="depositAmount" />
+                                                    </div>
+
+                                                    <button class="btn btn-primary" type="submit" style="width: 100%">
+                                                      Upload
+                                                    </button>
+                                                  </form>
+                                                </div>
+                                                <div class="modal-footer"></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3"></div>
+                  </div>
+
+                  <%}else{%>
+                    <p>Loading data...</p>
+                    <%}%>
+              </div>
+          </div>
+          <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; nexgoldfinance.com 2021</span>
+              </div>
+            </div>
+          </footer>
+        </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <%- include ('partials/dashboardFooter.ejs') %>
+  </body>

@@ -1,0 +1,178 @@
+<footer id="contact" class="footer-area" style="background-color: black">
+  <!--footer area start-->
+  <div class="footer-bottom" style="background-color: black">
+    <div class="footer-support-bar" style="background-color: black">
+      <!-- Footer Support List Start -->
+      <div class="footer-support-list" style="background-color: black">
+        <ul>
+          <li class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="1s">
+            <div class="footer-thumb"><i class="fa fa-headphones"></i></div>
+            <div class="footer-content">
+              <p>24/7 Customer Support</p>
+            </div>
+          </li>
+          <li class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="2s">
+            <div class="footer-thumb"><i class="fa fa-envelope"></i></div>
+            <div class="footer-content">
+              <p>
+                <a href="mailto:info@nexgoldfinance.com">info@nexgoldfinance.com</a>
+              </p>
+            </div>
+          </li>
+          <li class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="3s">
+            <div class="footer-thumb"><i class="fa fa-comments-o"></i></div>
+            <div class="footer-content">
+              <p>Friendly Support Ticket</p>
+            </div>
+          </li>
+          <li class="wow bounceInDown" data-wow-duration="1s" data-wow-delay="4s">
+            <div class="footer-thumb"><i class="fa fa-phone"></i></div>
+            <div class="footer-content">
+              <p>+447360236949</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- Footer Support End -->
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-12 wow fadeInLeft" data-wow-duration="3s">
+          <p class="copyright-text">Copyright © 2021 All Right Reserved.</p>
+        </div>
+        <div class="col-md-4 col-sm-12 wow bounceInDown" data-wow-duration="3s"></div>
+        <div class="col-md-4 col-sm-12 wow bounceInDown" data-wow-duration="3s">
+          <!-- <p class="copyright-text">
+                      <a href="terms.html" class="text-center" style="color: #fff;">Term Of Use</a> |
+                      <a href="privacy.html" class="text-right" style="color: #fff;">Privacy Policy</a>
+                  </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="back-to-top" class="scroll-top back-to-top" data-original-title title>
+    <i class="fa fa-angle-up"></i>
+  </div>
+</footer>
+
+<style type="text/css">
+  li.export-main {
+    visibility: hidden;
+  }
+</style>
+<script src="js/js.js"></script>
+<script src="js/jquery.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/gmaps.js"></script>
+<script src="js/highlight.min.js"></script>
+<script src="js/jquery-ui-slider.min.js"></script>
+<script src="js/jquery.circliful.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/jquery.ripples-min.js"></script>
+<script src="js/jquery.slicknav.min.js"></script>
+<script src="js/lightcase.js"></script>
+<script src="js/particles.min.js"></script>
+<script src="js/particles-custom.js"></script>
+<script src="js/raindrops.js"></script>
+<script src="js/easing-min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script type="text/javascript" src="js/ion.rangeSlider.js"></script>
+<script type="text/javascript">
+  $(window).load(function () {
+    var wow = new WOW({
+      boxClass: "wow",
+      animateClass: "animated",
+      offset: 0,
+      mobile: true,
+      live: true,
+    });
+    wow.init();
+  });
+</script>
+
+<script>
+  $.each($(".slider-input"), function () {
+    var $t = $(this),
+      from = $t.data("from"),
+      to = $t.data("to"),
+      $dailyProfit = $($t.data("dailyprofit")),
+      $totalProfit = $($t.data("totalprofit")),
+      $val = $($t.data("valuetag")),
+      perDay = $t.data("perday"),
+      perYear = $t.data("peryear");
+
+    $t.ionRangeSlider({
+      input_values_separator: ";",
+      prefix: "$ ",
+      hide_min_max: true,
+      force_edges: true,
+      onChange: function (val) {
+        $val.val("$ " + val.from);
+
+        var profit = ((val.from * perDay) / 100).toFixed(1);
+        profit = "$ " + profit.replace(".", ".");
+        $dailyProfit.text(profit);
+
+        profit = (((val.from * perDay) / 100) * perYear).toFixed(1);
+        profit = "$ " + profit.replace(".", ".");
+        $totalProfit.text(profit);
+      },
+    });
+  });
+  $(".invest-type__profit--val").on("change", function (e) {
+    var slider = $($(this).data("slider")).data("ionRangeSlider");
+
+    slider.update({
+      from: $(this).val().replace("$ ", ""),
+    });
+  });
+</script>
+<script src="js/main.js"></script>
+
+<script src="js/main_1.js"></script>
+
+<script>
+  var mobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+  hljs.initHighlightingOnLoad();
+  hljs.configure({ useBR: true });
+  jQuery("#raindrops").raindrops({ color: "#fff", canvasHeight: 5 });
+  jQuery("#raindrops-green").raindrops({ color: "red", canvasHeight: 5 });
+</script>
+<!-- 
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function () {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = "https://embed.tawk.to/60c531997f4b000ac0374ca3/1f814jh63";
+    s1.charset = "UTF-8";
+    s1.setAttribute("crossorigin", "*");
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script> -->
+
+
+<script src="particles.js-master/particles.js"></script>
+<script src="particles.js-master/demo/js/app.js"></script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: "en" },
+      "google_translate_element"
+    );
+  }
+</script>
+
+<script type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

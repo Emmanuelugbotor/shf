@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/header.ejs') %>
+
+    <div class="cshcr-caroulse-layout" style="background-color: rgba(37, 104, 239, 1);" data-time="10"
+        data-fsym="ETH,BTC,DASH,ADA,XRP,ETC,LTC,TRIG,WARP" data-tsyms="USD">
+        <div class="tradingview-widget-container clearfix" style="width: 100%; height:52px;background-color:rgba(37, 104, 239, 1);">
+
+            <iframe scrolling="no" allowtransparency="true" frameborder="0"
+                src="https://s.tradingview.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22title%22%3A%22S%26P%20500%22%2C%22proName%22%3A%22OANDA%3ASPX500USD%22%7D%2C%7B%22title%22%3A%22Shanghai%20Composite%22%2C%22proName%22%3A%22INDEX%3AXLY0%22%7D%2C%7B%22title%22%3A%22EUR%2FUSD%22%2C%22proName%22%3A%22FX_IDC%3AEURUSD%22%7D%2C%7B%22title%22%3A%22BTC%2FUSD%22%2C%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%7D%2C%7B%22title%22%3A%22ETH%2FUSD%22%2C%22proName%22%3A%22BITSTAMP%3AETHUSD%22%7D%5D%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22bittradecapitals.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%7D"
+                style="box-sizing: border-box; height: 72px; width: 100%; color:white !important;"></iframe>
+
+
+        </div>
+    </div>
+    <!-- header end -->
+
+
+
+    <!--header section start-->
+    <section class="breadcrumb-section" style="background-image: url(images/contact.png)">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-content">
+                        <h5>Contact Us</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section contact-section1 section-padding section-background">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact-info">
+                        <div class="row ">
+
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 col-xl-6">
+                                <div class="contact-content">
+                                    <div class="contact-header contact-form">
+                                        <h2>Get In Touch</h2>
+                                    </div>
+                                    <div class="contact-list">
+                                        <ul>
+                                            <li>
+                                                <div class="contact-thumb"><i class="fa fa-map-marker"
+                                                        aria-hidden="true"></i></div>
+                                                <div class="contact-text">
+                                                    <p>Address:<span> 55 King William Street
+                                                            London, EC4R 9AD, UNITED KINGDOM</span></p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="contact-thumb"><i class="fa fa-phone"
+                                                        aria-hidden="true"></i></div>
+                                                <div class="contact-text">
+                                                    <p>Call Us :<span> +447360236949 </span></p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="contact-thumb"><i class="fa fa-envelope-o"
+                                                        aria-hidden="true"></i></div>
+                                                <div class="contact-text">
+                                                    <p>Mail Us :<span>info@nexgoldfinance.com</span></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+
+
+                            <!-- <div class="form-column col-md-8 col-sm-12 ">
+                                <div class="contact-form ">
+								<form>
+                                    <h2>Send Us Message</h2>
+									<br>
+
+                                    <p style="color: black;" id="www">
+                                        <%if(error){%>
+                                            <%= error %>
+                                        <%}%>
+                                      </p>
+									                                
+                                    <form action="/contactSubmit" method="POST">
+                                        <input type="hidden" name="_token" value="cFDS2nWOkaAAgyFLWxbQyhLYYwhingHfQvSlOQ9E">
+                                        <div class="row clearfix">
+                                            <div class="col-md-6  col-xs-12 form-group">
+                                                <input type="text" name="name"  placeholder="Your Name*">
+                                            </div>
+
+                                            <div class="col-md-6  col-xs-12 form-group">
+                                                <input type="email" name="email"  placeholder="Email Address*">
+                                            </div>
+											 <div class="col-md-6  col-xs-12 form-group">
+											<input type="text" name="subject"  placeholder="Subject">
+											</div>
+											 <div class="col-md-6  col-xs-12 form-group">
+											<input type="text" name="phone"  placeholder="Phone Number">
+											</div>
+                                            <div class=" col-md-12   form-group">
+                                                <textarea name="message"  placeholder="Your Message..."></textarea>
+                                            </div>
+
+                                            <div class=" col-md-12 form-group">
+                                            <input type="submit"   style="background-color: rgba(37, 104, 239, 1) !important; border-color: rgba(37, 104, 239, 1);"  value="Send Message Now" />
+                                            </div>
+
+                                        </div>
+                                       
+                                    </form>
+
+                                </form></div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--End Contact Section-->
+    <!--Map Section-->
+    <!-- <div class="map-section">
+        <div class="map-outer">
+            <div class="google-map" id="contact-google-map" data-map-lat="44.529688" data-map-lng="-72.933009" data-icon-path="assets/img/map-marker.html" data-map-title="Brooklyn, New York, United Kingdom" data-map-zoom="14" data-markers="{
+                    "marker-1": [44.529688, -72.933009, "<h4>Head Office</h4><p>44/108 Brooklyn, UK</p>"],
+                    "marker-2": [44.231172, -76.485954, "<h4>Branch Office</h4><p>4/99 Alabama, USA</p>"],
+                    "marker-3": [44.999684, -69.070334, "<h4>Branch Office</h4><p>4/99 Maine, USA</p>"],
+                    "marker-4": [40.880550, -77.393705, "<h4>Branch Office</h4><p>4/99 Pennsylvania, USA</p>"]
+                }">
+
+            </div>
+
+        </div> -->
+    </div>
+    <script>
+        // var info = document.getElementById("www2").innerText;
+        // // console.log(info)
+        //   if (document.getElementById("www").innerText !== "") {
+        //   // console.log(info)
+        //   swal("try again", `${info}`, "info")
+        //   }
+
+        var success2 = document.getElementById("www").innerText
+        console.log(success2)
+        if (document.getElementById("www").innerText !== "") {
+            // console.log(success)
+            swal("Email Sent", `${success2}`, "success")
+        }
+    </script>
+
+
+    <%- include('partials/footer.ejs') %>
+
+        </body>
+
+</html>
