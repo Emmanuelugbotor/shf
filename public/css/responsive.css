@@ -850,13 +850,22 @@
 
         .slicknav_menu .slicknav_btn {
             background: #fff;
-            border:1px solid #77b047;
+            box-shadow: 0 4px 2px rgba(0,0,0,.24), 0 -2px 4px rgba(0,0,0,.24);
         }
 
         .slicknav_menu .slicknav_menutxt {
             display: none;
         }
+        .slicknav_menu .slicknav_icon{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width:100%;
+            margin:0;
+            padding:0;
 
+        }
         .slicknav_menu .slicknav_icon span {
             background: #3A4E61;
         }
@@ -1074,8 +1083,15 @@
         height: auto;
         overflow-y: auto;
     }
+    .slicknav_nav, ul.slicknav_nav  > li:hover > a{
+        color:blue;
+    }
+    .slicknav_nav, ul.slicknav_nav li > ul.mega-menu{
+        background:#fff!important;
+    }
     .slicknav_nav{
-            background: red;
+            background: #fff;
+            box-shadow: 10px -5px 10px rgba(0,0,0,.15);
     }
     .support-bar {
     display: none;

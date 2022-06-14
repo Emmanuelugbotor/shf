@@ -64,49 +64,31 @@ a:hover {
 .section-header p{
     position: relative;
 }
-.section-header p:before{
-    content:"";
-    position: absolute;
-    top:50%;
-    right:38%;
+.section-header .wrapper {
+    display:flex;
+    align-items: center;
+    width:100%;
+    text-align: center;
+    justify-content: center;
+}
+.section-header .wrapper img{
+    transform: translateY(-12px);
+}
+.section-header .wrapper p{
     background-color: rgba(37, 104, 239, 1);
     width:120px;
     height: 3px;
     border-top-left-radius: 2px;
     border-bottom-left-radius:2px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform:    translateY(-50%);
-      -ms-transform:    translateY(-50%);
-      -o-transform:     translateY(-50%);
-      transform:        translateY(-50%);
-    
 }
-.section-header p:after{
-    content:"";
-    position: absolute;
-    top:50%;
-    left:38%;
-    background-color: rgba(37, 104, 239, 1);
-    width:120px;
-    height: 3px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius:2px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform:    translateY(-50%);
-      -ms-transform:    translateY(-50%);
-      -o-transform:     translateY(-50%);
-      transform:        translateY(-50%);
 
-}
 .section-header1 p:before{
     right:39%;
 }
 .section-header1 p:after{
     left:39%;
 }
-.section-header p img{
-    
-}
+
 .section-padding{
     padding: 85px 0px;
 }
@@ -3828,7 +3810,7 @@ footer.footer-area {
 }
 .contact-info .contact-content .contact-list ul li .contact-thumb i{
   font-size: 25px;
-  color:red;
+  color:rgba(37, 104, 239, 1);
 }
 .contact-info .contact-content .contact-list ul li .contact-text{
   display: table-cell;
@@ -3898,7 +3880,7 @@ footer.footer-area {
     bottom:0px;
     width:80px;
     height:4px;
-    background-color:red;
+    background-color:rgba(37, 104, 239, 1);
 }
 
 .contact-form .form-group{
@@ -5401,7 +5383,7 @@ select#country{
   margin-bottom: 11px;
   outline: medium none; }
   .testimonial-area .sin-testiImage img {
-    border: 1px solid  red;
+    border: 1px solid rgba(37, 104, 239, 1);
     border-radius: 50%;
     cursor: pointer;
     display: inline-block !important;
@@ -5411,7 +5393,7 @@ select#country{
     outline: 0 none;
     width: 80px; }
 .testimonial-area .sin-testiImage.slick-current img {
-  border: 3px solid red;
+  border: 3px solid rgba(37, 104, 239, 1);
   height: 146px;
   margin-top: 0;
   opacity: 1;
@@ -5651,7 +5633,7 @@ select#country{
     padding: 0px 0px;
     transition: all 0.5s ease-in-out; }
 .client-list .client-container .our-client:hover {
-      border: 1px solid red;
+      border: 1px solid rgba(37, 104, 239, 1);
       -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7);
       -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7);
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7); }
@@ -6327,7 +6309,9 @@ select#country{
 .overlay {
   background-color: rgba(45, 45, 45, 0.7); }
 .section-header img {
-	width: 28px;
+	width: 38px;
+    margin: 0 10px;
+    transform:translateY()
 }
 .alert {
     padding: 15px;
@@ -6403,4 +6387,10 @@ select#country{
 }
 .alert-danger .alert-link {
     color: #7f1212;
+}
+
+@media screen and (max-width:380px){
+    .main-menu.wow.slideInRight{
+        background: #fff!important;;
+    }
 }

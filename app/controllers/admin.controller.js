@@ -1,6 +1,6 @@
 const db = require("../models/models");
 const { Packages } = require("../utils/packages");
-const {generatePdf, sendOtp, sendBonusSms} = require("../utils/email.controller")
+const { generatePdf, sendOtp, sendBonusSms } = require("../utils/email.controller")
 const sql = require("../models/db.config");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
@@ -88,7 +88,7 @@ exports.approveplan = async (req, res) => {
   //           }
   //         );
   //       } else {
-          
+
   //         await sql.query(
   //           `SELECT status, id, amount FROM receipts WHERE user_id = ? AND status=?`,
   //           [ref, "Active"],
@@ -206,117 +206,118 @@ exports.deleteApprovedWithdrawal = async (req, res) => {
 exports.approvedWithdrawal = async (req, res) => {
   let { username, email, wallet, roi, receiptID, user_id } = req.params;
   console.log("THe amout of money  ", roi)
-  await sql.query("SELECT withdraw_req, ref_amt, amount FROM receipts WHERE id=? AND user_id=?", [parseInt(receiptID), parseInt(user_id) ], async (err, results)=>{
-    if(err) return console.log(err), req.flash("error", "Network Error"), res.redirect("back");
-    else{
+  await sql.query("SELECT withdraw_req, ref_amt, amount FROM receipts WHERE id=? AND user_id=?", [parseInt(receiptID), parseInt(user_id)], async (err, results) => {
+    if (err) return console.log(err), req.flash("error", "Network Error"), res.redirect("back");
+    else {
       let { withdraw_req, amount, ref_amt } = results[0]
-      if(parseInt(ref_amt) == 0){
+      if (parseInt(ref_amt) == 0) {
         ref_amt = amount
       }
-      let addedWithdraw = parseInt(withdraw_req)  + parseInt(roi);
+      let addedWithdraw = parseInt(withdraw_req) + parseInt(roi);
       let reducedCapital = (parseInt(amount) - parseInt(roi))
       console.log(`${username} REQUESTED FOR A WITHDRAW WITH THE AMOUNT OF ${roi}`)
       let userObject = {
-        username, email, wallet, roi  
+        username, email, wallet, roi
       }
-     
-          await generatePdf(userObject, async (err, result)=>{
-            if(err) return console.log(err), req.flash("error", "Network Error !, please connect to good network and try again"), res.redirect("back");
-            else{
 
-              await sql.query("UPDATE receipts SET  amount=?, withdraw_req=?, ref_amt=? WHERE id=? AND user_id=?", [reducedCapital, 
-                addedWithdraw, ref_amt, parseInt(receiptID), parseInt(user_id)], async (erro, result)=>{
-                  if(err) return console.log("Error occured when updating users request", erro), req.flash("error", "Network Error"), res.redirect("back");
-                  return req.flash("error", "Email Receipts Sent Successfuly"), res.redirect("back");
+      await generatePdf(userObject, async (err, result) => {
+        if (err) return console.log(err), req.flash("error", "Network Error !, please connect to good network and try again"), res.redirect("back");
+        else {
+
+          await sql.query("UPDATE receipts SET  amount=?, withdraw_req=?, ref_amt=? WHERE id=? AND user_id=?", [reducedCapital,
+            addedWithdraw, ref_amt, parseInt(receiptID), parseInt(user_id)], async (erro, result) => {
+              if (err) return console.log("Error occured when updating users request", erro), req.flash("error", "Network Error"), res.redirect("back");
+              return req.flash("error", "Email Receipts Sent Successfuly"), res.redirect("back");
             })
-            }
-        })
+        }
+      })
     }
 
 
   })
 
-  
+
 
 
 };
 
-exports.changePassword= async(req, res)=>{
+exports.changePassword = async (req, res) => {
 
-  let {admin_id} = req.user;
-  let {email, password, newPassword} = req.body;
+  let { admin_id } = req.user;
+  let { email, password, newPassword } = req.body;
 
   const encryptedPassword = await bcrypt.hash(newPassword, saltRounds);
-   await db.adminEmailValidate(email, admin_id, async (err, result)=>{
-     if(err) return (req.flash("error", "Incorrect details"), res.redirect("back"))
-     else{
-       if(result.length > 0){
+  await db.adminEmailValidate(email, admin_id, async (err, result) => {
+    if (err) return (req.flash("error", "Incorrect details"), res.redirect("back"))
+    else {
+      if (result.length > 0) {
         const hash = result[0].password.toString();
         bcrypt.compare(password, hash, async function (err, response) {
-            if (response === true) {
-               await db.updateAdminPassword(encryptedPassword, admin_id, (err, outcome)=>{
-                 err ? (req.flash("error", "Network Error"), res.redirect("back")) : (req.flash("error", "Password changed successfuly"), res.redirect("back"))
-               })
-            }
-            else { return (req.flash("error", "Incorrect Password" ), res.redirect("back")) }
+          if (response === true) {
+            await db.updateAdminPassword(encryptedPassword, admin_id, (err, outcome) => {
+              err ? (req.flash("error", "Network Error"), res.redirect("back")) : (req.flash("error", "Password changed successfuly"), res.redirect("back"))
+            })
+          }
+          else { return (req.flash("error", "Incorrect Password"), res.redirect("back")) }
         })
-       }else return (req.flash("error", "Incorrect Email"), res.redirect("back"))
-     }
-   });
-   
+      } else return (req.flash("error", "Incorrect Email"), res.redirect("back"))
+    }
+  });
+
 }
 
 
 exports.usertopup = async (req, res) => {
-  let { moneyto, user_id, email }  = req.body;
+  let { moneyto, user_id, email } = req.body;
 
-  await sql.query(`select bonus from miningusers where id=?`, [user_id], async(error, ress)=>{
-    
-    if(error) console.log(error)
-    for(var y of ress){
-    if(isNaN(parseInt(y.bonus)) == true){
-      await db.updateBonus(parseInt(moneyto),  parseInt(user_id), async (err, result) => {
-        if(err){
-          console.log(err)
-          return res.redirect("back")
-        }else{
-          await sendBonusSms(email, moneyto, (err, bounsRes)=>{
-            if(err){
-              console.log(err)
-              req.flash( "error", "Network Error, Try again.");
-              return res.redirect("back")
-            }else{
-              req.flash( "error", "Users Account Top Up Successfully");
-              res.redirect("back")
-            }
-          });
-        }    
-      })
-    }
-    else{
-      var addAmt = 0;
-      for(var x of ress){
-        addAmt =  parseInt(x.bonus) + parseInt(moneyto)
+  console.log(email, moneyto, user_id)
+  await sql.query(`select bonus from miningusers where id=?`, [user_id], async (error, ress) => {
+
+    if (error) console.log(error)
+    for (var y of ress) {
+      if (isNaN(parseInt(y.bonus)) == true) {
+        await db.updateBonus(parseInt(moneyto), parseInt(user_id), async (err, result) => {
+          if (err) {
+            console.log(err)
+            return res.redirect("back")
+          } else {
+            await sendBonusSms(email, moneyto, (err, bounsRes) => {
+              if (err) {
+                console.log(err)
+                req.flash("error", "Network Error, Try again.");
+                return res.redirect("back")
+              } else {
+                req.flash("error", "Users Account Top Up Successfully");
+                res.redirect("back")
+              }
+            });
+          }
+        })
       }
-      await db.updateBonus(parseInt(addAmt),  parseInt(user_id), async (err, result) => {
-        if(err){
-          console.log(err)
-          return res.redirect("back")
-        }else{
-          await sendBonusSms(email, addAmt, (err, bounsRes)=>{
-            if(err){
-              console.log(err)
-              req.flash( "error", "Network Error, Try again.");
-              return res.redirect("back")
-            }else{
-              req.flash( "error", "Users Account Top Up Successfully");
-              res.redirect("back")
-            }
-          });
-        }    
-      })
+      else {
+        var addAmt = 0;
+        for (var x of ress) {
+          addAmt = parseInt(x.bonus) + parseInt(moneyto)
+        }
+        await db.updateBonus(parseInt(addAmt), parseInt(user_id), async (err, result) => {
+          if (err) {
+            console.log(err)
+            return res.redirect("back")
+          } else {
+            await sendBonusSms(email, addAmt, (err, bounsRes) => {
+              if (err) {
+                console.log(err)
+                req.flash("error", "Network Error, Try again.");
+                return res.redirect("back")
+              } else {
+                req.flash("error", "Users Account Top Up Successfully");
+                res.redirect("back")
+              }
+            });
+          }
+        })
+      }
     }
-  }
   })
 };
 

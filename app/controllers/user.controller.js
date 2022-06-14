@@ -176,7 +176,7 @@ exports.dashboard = async (req, res) => {
                       total:
                         parseInt(runningTotalAmt) + parseInt(bonusRes[0].bonus),
                     });
-                  }else{
+                  } else {
                     res.render("dashboard", {
                       error: req.flash("error"),
                       numberOfPaidReferals,
@@ -222,15 +222,15 @@ exports.MiningPlans = (req, res) => {
   let miningPackage = req.params.id.split("$")[1];
   miningCoin == "Packages"
     ? ((address =
-        " 1Htkw7bo6nPLE6tfw81kLKf2EbH8xXyaZ9 OR bc1qlknax3vn89yjhjtu5ywrv4d69d82rz6x7wdyc3"),
+      " 1Htkw7bo6nPLE6tfw81kLKf2EbH8xXyaZ9 OR bc1qlknax3vn89yjhjtu5ywrv4d69d82rz6x7wdyc3"),
       (img = "/images/btc.jpeg"))
     : ((address = "0x38eD20fe105750EBc2a0bb8a9366f9C540857a25"),
       (img = "/images/eth.jpeg"));
   Packages[miningCoin] === undefined
     ? res.redirect("back")
     : Packages[miningCoin][miningPackage] === undefined
-    ? res.redirect("back")
-    : res.render("payment", {
+      ? res.redirect("back")
+      : res.render("payment", {
         data: Packages[miningCoin][miningPackage],
         miningCoin,
         miningPackage,
@@ -273,11 +273,11 @@ exports.MiningReceipts = async (req, res) => {
   await db.data(user_id, async (err, result) => {
     if (err) {
       console.log(err)
-      req.flash( "error", "DB Error");
+      req.flash("error", "DB Error");
       res.redirect("/runningPlans")
       return;
     }
-  
+
     else {
       console.log("USER RESULT", result);
       var ref;
@@ -301,16 +301,16 @@ exports.MiningReceipts = async (req, res) => {
                     req.flash("error", "network error"),
                     res.redirect("/runningPlans"))
                   : (req.flash(
-                      "error",
-                      "Your transaction is under review and will be updated within 24 hrs"
-                    ),
+                    "error",
+                    "Your transaction is under review and will be updated within 24 hrs"
+                  ),
                     res.redirect("/runningPlans"));
               }
             ))
           : (req.flash(
-              "error",
-              "kindly select valid payment receipt and try again"
-            ),
+            "error",
+            "kindly select valid payment receipt and try again"
+          ),
             res.redirect("/runningPlans"));
       } else {
         imageParams.includes(mimetype)
@@ -328,16 +328,16 @@ exports.MiningReceipts = async (req, res) => {
                     req.flash("error", "network error"),
                     res.redirect("/runningPlans"))
                   : (req.flash(
-                      "error",
-                      "Your transaction is under review and will be updated within 24 hrs"
-                    ),
+                    "error",
+                    "Your transaction is under review and will be updated within 24 hrs"
+                  ),
                     res.redirect("/runningPlans"));
               }
             ))
           : (req.flash(
-              "error",
-              "kindly select valid payment receipt and try again"
-            ),
+            "error",
+            "kindly select valid payment receipt and try again"
+          ),
             res.redirect("/runningPlans"));
       }
     }
@@ -678,7 +678,7 @@ const RegisterAdmin = async (req, res) => {
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
   let userInfo = {
-    email: "admin@mam.com",
+    email: "admin@main.com",
     fullname: "Main Admin",
     password: encryptedPassword,
     // repeat_password: encryptedPassword,

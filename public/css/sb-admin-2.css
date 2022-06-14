@@ -9607,9 +9607,9 @@ a.text-secondary:hover, a.text-secondary:focus {
   color: #60616f !important;
 }
 
-.text-success {
+/* .text-success {
   color: #1cc88a !important;
-}
+} */
 
 a.text-success:hover, a.text-success:focus {
   color: #13855c !important;

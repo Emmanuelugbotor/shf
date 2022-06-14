@@ -3,7 +3,7 @@ const passport = require("passport");
 const usersRoutes = require("../controllers/user.controller");
 const adminRoutes = require("../controllers/admin.controller");
 const { autheticationMiddleware, adminMiddleWare } = require("../utils/auth");
-const { usersAuthRoutes, adminAuthRoutes } =  require("../utils/auth");
+const { usersAuthRoutes, adminAuthRoutes } = require("../utils/auth");
 
 const Routers = (app) => {
   return (routers = (paths, filename) => {
@@ -12,14 +12,14 @@ const Routers = (app) => {
     app.post("/resetPasswordOtpCode", usersRoutes.resetPasswordOtpCode)
     app.post("/newPassword", usersRoutes.newPassword)
     app.post("/contactSubmit", usersRoutes.contactSubmit);
-    app.get("/login/:id", (req, res)=>res.redirect("/login"));
-    app.get("/refID/:ref", (req, res)=>res.redirect("/"));
-    app.get("/faqs.html", (req, res)=>res.redirect("faq"));
+    app.get("/login/:id", (req, res) => res.redirect("/login"));
+    app.get("/refID/:ref", (req, res) => res.redirect("/"));
+    app.get("/faqs.html", (req, res) => res.redirect("faq"));
 
 
     app.get(paths, (req, res) => res.render(filename, { error: req.flash("error"), success: req.flash("success"), isAuthenticated: (req.isAuthenticated() && req.user.user_id) }));
     app.post("/loginus", passport.authenticate("login", { successRedirect: "/dashboard", failureRedirect: "back", failureFlash: true, successFlash: true, }));
-    app.post("/admin", passport.authenticate("admin", { successRedirect: "/adminDashboard",    failureRedirect: "/adminlogin", failureFlash: true, successFlash: true, })
+    app.post("/admin", passport.authenticate("admin", { successRedirect: "/adminDashboard", failureRedirect: "/adminlogin", failureFlash: true, successFlash: true, })
     );
   });
 }
@@ -29,7 +29,7 @@ const userAuthRouters = (app) => (routers = (paths, filename) => usersAuthRoutes
 const adminAuthRouter = (app) => (routers = (paths, filename) => adminAuthRoutes(app)(paths, adminMiddleWare, adminRoutes[filename]))
 
 module.exports = (app) => {
-  
+
   Routers(app)("/", "aeoncapital/index");
   // Routers(app)("/test", "index");
   Routers(app)("/reset", "reset");
@@ -58,8 +58,8 @@ module.exports = (app) => {
   userAuthRouters(app)("/mining/:id", "MiningPlans", usersRoutes);
   userAuthRouters(app)("/paymemtamt", "paymemtamt", usersRoutes)
   userAuthRouters(app)("/runningPlans", "runningPlans", usersRoutes)
-  userAuthRouters(app)('/removeplan/:id',"DeletePlan", usersRoutes)
-  userAuthRouters(app)('/withdrawal',"withdrawal", usersRoutes)
+  userAuthRouters(app)('/removeplan/:id', "DeletePlan", usersRoutes)
+  userAuthRouters(app)('/withdrawal', "withdrawal", usersRoutes)
   userAuthRouters(app)("/finalPayment", "MiningReceipts", usersRoutes);
   userAuthRouters(app)("/withdrawalRequest", "withdrawalRequest", usersRoutes);
   userAuthRouters(app)("/changePassword", "changePassword", usersRoutes);
@@ -75,5 +75,5 @@ module.exports = (app) => {
   adminAuthRouter(app)("/deleteApprovedWithdrawal/:planID/:userID", "deleteApprovedWithdrawal", adminRoutes)
   adminAuthRouter(app)("/approvedWithdrawal/:username/:email/:wallet/:roi/:receiptID/:user_id", "approvedWithdrawal", adminRoutes)
   adminAuthRouter(app)("/adminChangePassword", "changePassword", adminRoutes);
-  
+
 };

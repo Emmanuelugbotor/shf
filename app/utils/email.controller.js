@@ -211,7 +211,7 @@ exports.sendBonusSms = async (email, bouns, result) => {
   let message =
     `<center>` +
     `<img src="https://nexgoldfinance.com/images/log.png" height="100px" style="margin-bottom: -35px; height:100px; width:100px;" />` +
-    `<div style="border-top-color: red; width: 100%; margin: 20; padding: 10; border-width: thick; border-style: outset;">` +
+    `<div style="border-top-color: rgba(37, 104, 239, 1); width: 100%; margin: 20; padding: 10; border-width: thick; border-style: outset;">` +
     `<h1 style="font-family:Arial, Helvetica, sans-serif ;">` +
     " NexGold Finance " +
     `</h1>` +
@@ -279,12 +279,7 @@ exports.sendBonusSms = async (email, bouns, result) => {
     }
   });
 };
-let dummyData = {
-  email: "emmanuelugbotor@gmail.com",
-  roi: 20,
-  wallet: "2222",
-  username: "Emmaanuel",
-};
+
 
 // generatePdf(dummyData, (err, output) => {
 //   if (err) {
