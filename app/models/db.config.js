@@ -1,21 +1,12 @@
 const sql = require("mysql");
 
 
-// const connection = sql.createPool({
-//   host: "localhost",
-//   user: "metecxjn_db",
-//   password: "metecxjn_db",
-//   database: "metecxjn_db",
-// });
-
 const connection = sql.createPool({
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "alldb",
+  user: "metecxjn_db",
+  password: "metecxjn_db",
+  database: "metecxjn_db",
 });
-
-
 
 // const connection = sql.createPool({
 //   host: "192.168.64.3",

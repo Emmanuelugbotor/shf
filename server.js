@@ -5,9 +5,7 @@ const session = require("express-session")
 const passport = require("passport")
 const MySQLStore = require("express-mysql-session")(session);
 // const options = { host: "192.168.64.3", user: "alldb", database: 'alldb', password:''}
-const options = { host: "localhost", user: "root", database: 'alldb', password: '' }
-
-// const options = { host: "localhost", user: "metecxjn_db", database: 'metecxjn_db', password: 'metecxjn_db' }
+const options = { host: "localhost", user: "metecxjn_db", database: 'metecxjn_db', password: 'metecxjn_db' }
 const sessionStore = new MySQLStore(options);
 const fileupload = require("express-fileupload");
 const app = express();
